@@ -18,7 +18,7 @@ running the script
 	- after the transport names show up you will be prompted to enter the index number, THIS IS 85% OF THE TIME THE FIRST TRANSPORT
 		- when you give it the transport it will locate it within the regedit, (NetCfgInstanceId) it will check within that folder if "NetworkAddress" is found
 		  if it is found, it will ask you if you would like to randomize it (bypassing it if the wifi has been paused) if not it will ask if you want to create
-		  a NetworkAddress type y then it will create it. 	
+		  a NetworkAddress type y then it will create it. (NETADDRESS IS THE BYPASS SO SAY Y) 	
 
 restart your computer
 - dont gotta explain this
