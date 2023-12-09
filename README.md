@@ -2,7 +2,7 @@
 - download python. [video](https://www.youtube.com/watch?v=YKSpANU8jPE)
 - open cmd or powershell or whatever (AS ADMIN (right click run as admin if ur stupid))
 - locate the folder
-- do python NetAddressHasher.py
+- do python NetAddress.py
 - do the stuff in the script
 - make sure to create a NetAddress when prompted
 - after the script says NetAddress created - blah blah blah
