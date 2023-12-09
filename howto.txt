@@ -1,0 +1,25 @@
+in detail how to run the script (cause i know people gonna not know how to)
+
+download python
+- add PATH when you first run the setup its somewhere in the ui
+	- python download can be found here as well https://www.python.org/downloads/ just click download 3.12.X (x is placeholder cus version gonna change)
+
+open cmd or powershell or whatever (AS ADMIN (right click run as admin if ur stupid))
+- both command prompt and powershell are perfectly fine to use. you can even use python idle
+ 	- to use python idle right click on the .py folder and click open in idle (any version there is probably only 1)
+
+locate the folder
+ - locate the folder using the "cd" command most likely it will be in your downloads
+	- in order do get their run cd .. (returning directory) then do it again
+		- then do "cd users\username\downloads" (replace username with ur name)
+
+running the script
+- when you first run the code it should say if its ran as admin or not (note that the force admin feature doesnt currently work)
+	- after the transport names show up you will be prompted to enter the index number, THIS IS 85% OF THE TIME THE FIRST TRANSPORT
+		- when you give it the transport it will locate it within the regedit, (NetCfgInstanceId) it will check within that folder if "NetworkAddress" is found
+		  if it is found, it will ask you if you would like to randomize it (bypassing it if the wifi has been paused) if not it will ask if you want to create
+		  a NetworkAddress type y then it will create it. 	
+
+restart your computer
+- dont gotta explain this
+
