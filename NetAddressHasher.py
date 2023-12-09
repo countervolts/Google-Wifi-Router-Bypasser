@@ -132,7 +132,7 @@ if __name__ == "__main__":
                     network_address = search_registry_for_network_address(key)
 
                     if network_address is None:
-                        create_option = input("NetworkAddress not found. do you want to create one? (y/n): ").lower()
+                        create_option = input("NetworkAddress not found. do you want to create one? (THIS IS THE BYPASS DO Y IF YOU WANT IT TO WORK) (y/n): ").lower()
                         if create_option == 'y':
                             create_network_address(instance[1])  # Pass the subkey name instead of the subkey
                     else:
