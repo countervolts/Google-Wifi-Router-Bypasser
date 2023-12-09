@@ -9,3 +9,6 @@
 
 ## help
 heres my discord if you need help [._ayo](https://discord.com/users/488368000055902228)
+
+## other information
+cus theres no fix for mobile (or atleast im not sure) you can create a hotspot from your computer and relay wifi from your computer to you mobile device :3 click [this](ms-settings:network-mobilehotspot?activationSource=SMC-IA-4027762) to open you hotspot settings 
