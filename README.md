@@ -1,5 +1,5 @@
 ## how did you figure this out??
-I didnt ALL CREDIT GOES TOWARDS THIS GUY [jet851](https://www.youtube.com/@jet851) heres the [video](https://www.youtube.com/watch?v=sABFw3q69eg)
+I didnt ALL CREDIT GOES TOWARDS THIS GUY [jet851](https://www.youtube.com/@jet851) heres the [video](https://www.youtube.com/watch?v=sABFw3q69eg),
 this simply automates the entire process with little human interaction need
 
 ## how to use
