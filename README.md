@@ -1,5 +1,6 @@
 ## how did you figure this out??
 I didnt ALL CREDIT GOES TOWARDS THIS GUY [jet851](https://www.youtube.com/@jet851) heres the [video](https://www.youtube.com/watch?v=sABFw3q69eg)
+this simply automates the entire process with little human interaction need
 
 ## how to use
 - download python. [video](https://www.youtube.com/watch?v=YKSpANU8jPE)
@@ -22,5 +23,6 @@ cus theres no fix for mobile (or atleast im not sure) you can create a hotspot f
 
 i have ONLY tested this on wifi so im not 100% sure if it will work on ethernet but if it does please tell me if it doesnt ill try to make a bypasser for ethernet (it should work for both)
 
-lastly this is a simple workaround currently.
-!IMPORTANT! Yes, if you get paused again the wifi will not work, so re-run the program
+- lastly this is a simple workaround currently.
+- there is currently no known permanent fix or patch. 
+- Yes, if you get paused again the wifi will not work, so re-run the program
