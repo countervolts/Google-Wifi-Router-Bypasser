@@ -19,4 +19,4 @@ cus theres no fix for mobile (or atleast im not sure) you can create a hotspot f
 
 i have ONLY tested this on wifi so im not 100% sure if it will work on ethernet but if it does please tell me if it doesnt ill try to make a bypasser for ethernet (it should work for both)
 
-lastly this is a HARD bypass this literally creates a new registry string key and is forced to use it.
+lastly this is a HARD bypass this literally creates a new registry string key and is forced to use it. (note if they pause you new mac just change it again using this <3)
