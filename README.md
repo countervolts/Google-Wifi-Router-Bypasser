@@ -1,11 +1,15 @@
 ## how to use
 - download python. [video](https://www.youtube.com/watch?v=YKSpANU8jPE)
-- run the program as admin
+- open cmd or powershell or whatever (AS ADMIN (right click run as admin if ur stupid))
+- locate the folder
+- do python NetAddressHasher.py
 - do the stuff in the script
 - make sure to create a NetAddress when prompted
 - after the script says NetAddress created - blah blah blah
 - restart your computer
 - enjoy wifi (if it doesnt work PLEASE tell me)
+
+
 
 ## help
 heres my discord if you need help [._ayo](https://discord.com/users/488368000055902228)
