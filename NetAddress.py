@@ -105,7 +105,7 @@ if __name__ == "__main__":
     if is_admin():
         print("running with administrative privileges.")
     else:
-        print("not running with administrative privileges. attempting to run as admin now. (unstable/doesnt work currently)")
+        print("not running with administrative privileges. attempting to run as admin now.")
         run_as_admin(os.path.abspath(__file__))
         exit()
 
@@ -149,3 +149,4 @@ if __name__ == "__main__":
             print("invalid index selected.")
     else:
         print("no transport names found.")
+input("restart your computer (enter to close)")
