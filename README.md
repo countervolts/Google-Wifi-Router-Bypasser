@@ -1,3 +1,6 @@
+## how did you figure this out??
+I didnt ALL CREDIT GOES TOWARDS THIS GUY [jet851](https://www.youtube.com/@jet851) heres the [video](https://www.youtube.com/watch?v=sABFw3q69eg)
+
 ## how to use
 - download python. [video](https://www.youtube.com/watch?v=YKSpANU8jPE)
 - open cmd or powershell or whatever (AS ADMIN (right click run as admin if ur stupid))
