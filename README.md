@@ -28,4 +28,4 @@ i have ONLY tested this on wifi so im not 100% sure if it will work on ethernet 
 - Yes, if you get paused again the wifi will not work, so re-run the program
 
 
-[fuck the population](https://ftp.org)
+[fuck the population](https://fuckthepopulation.com/pages/ftprecords)
