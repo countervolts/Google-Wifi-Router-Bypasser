@@ -19,6 +19,8 @@ this simply automates the entire process with little human interaction need
 - restart your computer
 - enjoy wifi (if it doesnt work PLEASE tell me)
 
+- if you are confused check out the howto.txt
+
 
 
 ## help
