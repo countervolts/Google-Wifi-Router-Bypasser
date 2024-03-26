@@ -2,7 +2,7 @@ import subprocess
 import re
 import winreg
 import random
-import string
+import socket
 import ctypes
 import os
 
@@ -134,11 +134,11 @@ if __name__ == "__main__":
                     if network_address is None:
                         create_option = input("NetworkAddress not found. do you want to create one? (THIS IS THE BYPASS DO Y IF YOU WANT IT TO WORK) (y/n): ").lower()
                         if create_option == 'y':
-                            create_network_address(instance[1])  # Pass the subkey name instead of the subkey
+                            create_network_address(instance[1]) 
                     else:
                         change_option = input("NetworkAddress found. do you want to change it? (y/n): ").lower()
                         if change_option == 'y':
-                            create_network_address(instance[1])  # Pass the subkey name instead of the subkey
+                            create_network_address(instance[1])
                         else:
                             print(f"NetworkAddress: {network_address}\n")
 
@@ -149,4 +149,31 @@ if __name__ == "__main__":
             print("invalid index selected.")
     else:
         print("no transport names found.")
-input("restart your computer (enter to close)")
+
+    create_vnet_option = input("would you like to hide your identity, this will create a virtual network masking your true identity (y/n): ").lower()
+    if create_vnet_option == 'y':
+        vnet_name = socket.gethostname() 
+        script_path = os.path.join(os.path.expanduser('~'), 'create_vnet.ps1')
+        with open(script_path, 'w') as f:
+            f.write(f'New-VMSwitch -Name "{vnet_name}" -SwitchType Internal\n')
+        cmd = f'powershell.exe -ExecutionPolicy Bypass -File "{script_path}"'
+        subprocess.run(cmd, shell=True)
+        cmd = f'schtasks /Create /SC ONSTART /TN "CreateVNet" /TR "powershell.exe -ExecutionPolicy Bypass -File \'{script_path}\'" /RU SYSTEM'
+        subprocess.run(cmd, shell=True)
+
+        cmd = f'powershell.exe Get-VMSwitch -Name "{vnet_name}"'
+        result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+        if result.stdout:
+            print(f"Virtual network '{vnet_name}' was created successfully.")
+        else:
+            print(f"Failed to create virtual network '{vnet_name}'.")
+
+        cmd = 'powershell.exe Get-VMSwitch | Where-Object {$_.SwitchType -eq "Internal"}'
+        result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+        if result.stdout:
+            shutdown_option = input("virtual network is already running, would you like to destroy it? (y/n): ").lower()
+            if shutdown_option == 'y':
+                cmd = 'powershell.exe Get-VMSwitch | Where-Object {$_.SwitchType -eq "Internal"} | Remove-VMSwitch -Force'
+                subprocess.run(cmd, shell=True)
+
+    input("restart your computer if you made a new netaddress (enter to close)")
