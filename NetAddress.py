@@ -5,6 +5,7 @@ import random
 import socket
 import ctypes
 import os
+import sys
 
 def is_admin():
     try:
@@ -12,12 +13,30 @@ def is_admin():
     except AttributeError:
         return False
 
-def run_as_admin(cmd):
-    """Run a command as administrator."""
+def run_as_admin():
+    """Run the current script as administrator."""
     try:
-        ctypes.windll.shell32.ShellExecuteW(None, "runas", "python", cmd, None, 1)
+        script_path = os.path.abspath(sys.argv[0])  # Get the path of the current script
+        ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, f'"{script_path}"', None, 1)
     except Exception as e:
         print(f"Error running as admin: {e}")
+
+## ignore please
+
+#def create_restore_point(description='NetAddress Restore Point', #restore_point_type=0, event_type=100):
+#    SRP = ctypes.windll.srpapi
+#    restore_point = ctypes.windll.srpapi._RESTOREPTINFOA()
+#    restore_point.dwEventType = event_type
+#    restore_point.dwRestorePtType = restore_point_type
+#    restore_point.llSequenceNumber = 0
+#    restore_point.szDescription = description
+#    status = SRP.SRSetRestorePointA(ctypes.byref(restore_point), None)
+#    if status == 0:
+#        print('Restore point created successfully.')
+#    else:
+#        print('Failed to create restore point.')
+#
+#create_restore_point()
 
 def get_transport_names():
     try:
@@ -25,17 +44,21 @@ def get_transport_names():
         lines = output.splitlines()
 
         transport_names = []
+        most_probable_transport_name = None
 
         for line in lines:
             match = re.search(r'(\{[\w-]+\})', line)
             if match:
-                transport_names.append(match.group(1))
+                transport_name = match.group(1)
+                transport_names.append(transport_name)
+                if most_probable_transport_name is None and transport_name != '':
+                    most_probable_transport_name = transport_name
 
-        return transport_names
+        return transport_names, most_probable_transport_name
 
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
-        return []
+        return [], None
 
 def search_registry_for_netcfg_instance_id(transport_name):
     key_path = r"SYSTEM\ControlSet001\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}"
@@ -85,7 +108,7 @@ def create_random_network_address():
 
 def create_network_address(subkey_name):
     value_name = 'NetworkAddress'
-    attempts = 3  # Number of attempts
+    attempts = 3 
     key_path = "SYSTEM\\ControlSet001\\Control\\Class\\{4d36e972-e325-11ce-bfc1-08002be10318}\\" + subkey_name
     while attempts > 0:
         value_data = create_random_network_address()
@@ -94,7 +117,7 @@ def create_network_address(subkey_name):
             winreg.SetValueEx(key, value_name, 0, winreg.REG_SZ, value_data)
             print(f"NetworkAddress created - Value Data: {value_data}")
             winreg.CloseKey(key)
-            return  # Successfully created, exit the function
+            return
         except Exception as e:
             print(f"Error creating NetworkAddress: {e}")
             attempts -= 1
@@ -102,26 +125,29 @@ def create_network_address(subkey_name):
     print("Failed to create NetworkAddress after multiple attempts.")
 
 if __name__ == "__main__":
-    if is_admin():
-        print("running with administrative privileges.")
-    else:
+    if not is_admin():
         print("not running with administrative privileges. attempting to run as admin now.")
-        run_as_admin(os.path.abspath(__file__))
-        exit()
+        run_as_admin()
+        sys.exit()
+    else:
+        print("running with administrative privileges.")
 
-    transport_names = get_transport_names()
-    
+    transport_names, most_probable_transport_name = get_transport_names()
+
     if transport_names:
-        print("available transport names (the first one is usually the correct one):")
+        print("Available transport names (the first one is usually the correct one):")
         for idx, name in enumerate(transport_names):
-            print(f"{idx + 1}. {name}")
+            if name == most_probable_transport_name:
+                print(f"{idx + 1}. {name} <-- the code detects this is the most likely one")
+            else:
+                print(f"{idx + 1}. {name}")
 
-        selected_index = int(input("enter the index of the transport name you want to search: ")) - 1
+        selected_index = int(input("Enter the index of the transport name you want to search: ")) - 1
 
         if 0 <= selected_index < len(transport_names):
             selected_transport_name = transport_names[selected_index]
-            print(f"\nselected transport name: {selected_transport_name}\n")
-
+            print(f"\nSelected transport name: {selected_transport_name}\n")
+            
             instances = search_registry_for_netcfg_instance_id(selected_transport_name)
 
             if instances:
