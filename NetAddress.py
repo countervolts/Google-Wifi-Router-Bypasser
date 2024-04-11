@@ -16,7 +16,7 @@ def is_admin():
 def run_as_admin():
     """Run the current script as administrator."""
     try:
-        script_path = os.path.abspath(sys.argv[0])  # Get the path of the current script
+        script_path = os.path.abspath(sys.argv[0])
         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, f'"{script_path}"', None, 1)
     except Exception as e:
         print(f"Error running as admin: {e}")
