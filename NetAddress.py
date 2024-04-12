@@ -129,26 +129,25 @@ def run_batch_commands():
     ip = subprocess.check_output("ipconfig | findstr /C:\"IPv4 Address\"", shell=True).decode().split(":")[-1].strip()
     blocking = "No"
 
-    while True:
-        print("THIS IS A BETA FEATURE IT IS NOT PERFECT AND MAY NOT WORK ACCORDINGLY")
-        print(f"fake disconnect: {ip}")
-        print(f"Blocking: {blocking}")
-        print("\n1. Block\n2. Unblock")
-        choice = input("Enter your choice: ")
+    print("THIS IS A BETA FEATURE IT IS NOT PERFECT AND MAY NOT WORK ACCORDINGLY")
+    print(f"fake disconnect: {ip}")
+    print(f"Blocking: {blocking}")
+    print("\n1. Block\n2. Unblock")
+    choice = input("Enter your choice: ")
 
-        if choice == "1":
-            if subprocess.call("netsh advfirewall firewall show rule name=\"BlockAllOutbound\"", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT):
-                subprocess.call("netsh advfirewall firewall add rule name=\"BlockAllOutbound\" dir=out action=block", shell=True)
-                blocking = "Yes"
-        elif choice == "2":
-            if not subprocess.call("netsh advfirewall firewall show rule name=\"BlockAllOutbound\"", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT):
-                subprocess.call("netsh advfirewall firewall delete rule name=\"BlockAllOutbound\"", shell=True)
-                blocking = "No"
-
+    if choice == "1":
+        if subprocess.call("netsh advfirewall firewall show rule name=\"BlockAllOutbound\"", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT):
+            subprocess.call("netsh advfirewall firewall add rule name=\"BlockAllOutbound\" dir=out action=block", shell=True)
+            blocking = "Yes"
+    elif choice == "2":
         if not subprocess.call("netsh advfirewall firewall show rule name=\"BlockAllOutbound\"", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT):
-            print("Outbound connections: Blocked")
-        else:
-            print("Outbound connections: Not blocked")
+            subprocess.call("netsh advfirewall firewall delete rule name=\"BlockAllOutbound\"", shell=True)
+            blocking = "No"
+
+    if not subprocess.call("netsh advfirewall firewall show rule name=\"BlockAllOutbound\"", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT):
+        print("Outbound connections: Blocked")
+    else:
+        print("Outbound connections: Not blocked")
 
 def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -178,7 +177,6 @@ def handle_beta_feature_selection(beta_dict):
         if int(choice) == len(beta_dict) + 1:
             for function_to_run in beta_dict.values():
                 function_to_run()
-            break
         else:
             function_to_run = list(beta_dict.values())[int(choice) - 1]
             function_to_run()
@@ -210,10 +208,23 @@ def create_vnet():
                 cmd = 'powershell.exe Get-VMSwitch | Where-Object {$_.SwitchType -eq "Internal"} | Remove-VMSwitch -Force'
                 subprocess.run(cmd, shell=True)
 
+def create_hotspot():
+    ssid = input("name of hotspot: ")
+    key = input("password: ")
+    subprocess.run(f'netsh wlan set hostednetwork mode=allow ssid={ssid} key={key}', shell=True)
+    subprocess.run('netsh wlan start hostednetwork', shell=True)
+    hosted_network_info = subprocess.check_output('netsh wlan show hostednetwork', shell=True).decode()
+    status = re.search(r'Status\s+:\s+(\w+)', hosted_network_info)
+    if status:
+        print(f"Hosted network status: {status.group(1)}")
+    else:
+        print("Could not determine hosted network status.")
+
 beta_dict = {
     "FakeDc\n- Also known as FakeDisconnect, this will attempt to false your device diconnection so when bypassing there will be no new device pop up\n": run_batch_commands,
     "Faux identity\n- This pairs perfectly with FakeDc, by creating a fake you!\n": create_vnet,
-    "Failsafe/Restore Point\n- this will create a restore point which can be used if something bad happens (not really tested)\n": create_restore_point
+    "Failsafe/Restore Point\n- this will create a restore point which can be used if something bad happens (not really tested)\n": create_restore_point,
+    "Personal Hotspot\n- this will create a personal hotspot using the built-in Windows feature\n": create_hotspot
 }
 
 display_beta_features(beta_dict)
@@ -253,14 +264,17 @@ if __name__ == "__main__":
         print("bypass: active (very possible)")
     else:
         print("bypass: not running")
-    if beta_choice.lower() == "y":
-        run_batch_commands()
     if not is_admin():
         print("???? (failsafe)")
         run_as_admin()
         sys.exit()
     else:
-        print("running with administrative privileges.")
+        hosted_network_info = subprocess.check_output('netsh wlan show hostednetwork', shell=True).decode()
+        status = re.search(r'Status\s+:\s+(\w+)', hosted_network_info)
+        if status:
+            print(f"Hotspot status: {status.group(1)}")
+        else:
+            print("error")
     transport_names, most_probable_transport_name = get_transport_names()
     if transport_names:
         print("\nAvailable transport names (the first one is usually the correct one):")
