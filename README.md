@@ -1,7 +1,8 @@
-## how did you figure this out??
-I didnt ALL CREDIT GOES TOWARDS THIS GUY [jet851](https://www.youtube.com/@jet851) heres the [video](https://www.youtube.com/watch?v=sABFw3q69eg),
-this simply automates the entire process with little human interaction need also adds more safety features for the user
+## who made this?
+me countervolts
 
+
+# how to run
 ## running compiled version
 - goto [releases](https://github.com/countervolts/Google-Wifi-Router-Bypasser/releases)
 - download NetAddress.exe
@@ -35,3 +36,5 @@ this simply automates the entire process with little human interaction need also
 
 ## help
 heres my discord if you need help [._ayo](https://discord.com/users/488368000055902228)
+
+and server [here](https://discord.gg/pGF56zvvJx)
