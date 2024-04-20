@@ -49,7 +49,7 @@ if __name__ == "__main__":
         run_as_admin()
         sys.exit()
     else:
-        check_for_updates('2.0.1')
+        check_for_updates('2.1.1')
 
         hosted_network_info = subprocess.check_output('netsh wlan show hostednetwork', shell=True).decode()
         status = re.search(r'Status\s+:\s+(\w+)', hosted_network_info)
