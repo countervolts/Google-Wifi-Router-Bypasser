@@ -8,7 +8,7 @@ import subprocess
 
 def set_window_title():
     random_title = ''.join(random.choices(string.ascii_letters + string.digits, k=32))
-    random_title += " - created by countervolts (v2.0.1)"
+    random_title += " - created by countervolts (v2.1.1)"
     ctypes.windll.kernel32.SetConsoleTitleW(random_title)
 
 def is_admin():
@@ -60,5 +60,5 @@ def check_for_updates(current_version):
     else:
         print("You're running the latest version.")
 
-current_version = '2.0.1'
+current_version = '2.1.1'
 check_for_updates(current_version)
