@@ -1,8 +1,6 @@
 ## who made this?
 me countervolts
 
-
-# how to run
 ## running compiled version
 - goto [releases](https://github.com/countervolts/Google-Wifi-Router-Bypasser/releases)
 - download NetAddress.exe
