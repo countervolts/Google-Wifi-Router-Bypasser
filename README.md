@@ -9,18 +9,6 @@ me countervolts
 - run as admin (or dont)
 - enjoy
 
-## how to use (more complicated way)
-- download python. [video](https://www.youtube.com/watch?v=YKSpANU8jPE)
-- open cmd or powershell
-- locate the folder
-- do python NetAddress.py
-- do the stuff in the script
-- make sure to create a NetAddress when prompted
-- after the script says NetAddress created - blah blah blah
-- restart your computer
-- enjoy wifi (if it doesnt work PLEASE tell me)
-- if you are confused check out the howto.txt
-
 ## current beta features
 #### FakeDc
 - Possibly the singlehanded thing to trump everything else, this will block outgoing requests to Google and router so there is nothing showing for a new device joined.
