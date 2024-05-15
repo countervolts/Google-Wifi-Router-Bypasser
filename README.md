@@ -1,5 +1,5 @@
 ## who made this?
-me countervolts
+me countervolts/ayo
 
 ## running compiled version
 - goto [releases](https://github.com/countervolts/Google-Wifi-Router-Bypasser/releases)
