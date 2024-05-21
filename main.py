@@ -49,7 +49,7 @@ if __name__ == "__main__":
         run_as_admin()
         sys.exit()
     else:
-        check_for_updates('2.1.1')
+        check_for_updates('2.1.2')
 
         hosted_network_info = subprocess.check_output('netsh wlan show hostednetwork', shell=True).decode()
         status = re.search(r'Status\s+:\s+(\w+)', hosted_network_info)
@@ -83,15 +83,15 @@ if __name__ == "__main__":
                     key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path, 0, winreg.KEY_READ)
                     network_address = search_registry_for_network_address(key)
                     if network_address is None:
-                        create_option = input("NetworkAddress not found. do you want to create one? (THIS IS THE BYPASS DO Y IF YOU WANT IT TO WORK) (y/n): ").lower()
+                        create_option = input("Bypass not found. do you want to bypass (if you are running the spoofer turn your internet off now) (y/n): ").lower()
                         if create_option == 'y':
                             create_network_address(instance[1]) 
                     else:
-                        change_option = input("NetworkAddress found. do you want to change it? (y/n): ").lower()
+                        change_option = input("Bypass found. do you want to change it? (if you are running the spoofer turn your internet off now) (y/n): ").lower()
                         if change_option == 'y':
                             create_network_address(instance[1])
                         else:
-                            print(f"NetworkAddress: {network_address}\n")
+                            print(f"NetworkAddress (enter this in the spoofer): {network_address}\n after entering that into the spoofer turn it on and turn your wifi/ethernet back on")
 
                     winreg.CloseKey(key)
             else:
