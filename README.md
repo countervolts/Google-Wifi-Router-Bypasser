@@ -1,3 +1,6 @@
+# !IMPORTANT!
+### this code has reached EOL (end of life) please switch to version 2 [here](https://github.com/countervolts/Bypass-V2)
+
 ## who made this?
 me countervolts/ayo
 
